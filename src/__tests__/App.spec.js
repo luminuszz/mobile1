@@ -30,6 +30,7 @@ apiMock.onGet("repositories").reply(200, [
   },
 ]);
 
+
 jest.mock(
   "react-native/Libraries/Components/Touchable/TouchableOpacity.js",
   () => {
@@ -58,6 +59,7 @@ describe("Likes", () => {
         techs: ["React Native", "Node.js"],
         likes: 1,
       });
+    
 
     await actWait();
 
