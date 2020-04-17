@@ -12,15 +12,20 @@ import {
 
 export default function App() {
   const [repository, setRepository] = useState([]);
-  const [like, setLike] = useState();
   async function handleLikeRepository(id) {
-    const response = await api.post(`/repositories/${id}/like`);
+    await api.post(`/repositories/${id}/like`)
+    .then(()=>{
+      const like = repository.find(repos=> repos.id === id)
+      console.tron.log(like)
+    })
     
   }
 
   useEffect(() => {
     api.get("/repositories").then((response) => setRepository(response.data));
-  }, [repository]);
+  }, []);
+
+  
 
   return (
     <>
@@ -54,7 +59,7 @@ export default function App() {
 
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => handleLikeRepository(values.id)}
+                onPress={() => handleLikeRepository(repository.id)}
                 // Remember to replace "1" below with repository ID: {`like-button-${repository.id}`}
                 testID={`like-button-${repository.id}`}
               >
